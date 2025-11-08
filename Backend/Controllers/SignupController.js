@@ -12,7 +12,7 @@ exports.Signup=async(req,res)=>{
                 success:false,
                 message:"email already exits"
             })
-
+ 
         }
         const existingFirstname=await user.findOne({Firstname})
         if(existingFirstname){
@@ -50,7 +50,7 @@ exports.Signup=async(req,res)=>{
         newUser.save()
          return res.status(200).json({
             success:true,
-            message:`${username} registred succesfully`
+            message:`${Firstname} registred succesfully`
         })
     }catch(error){
          console.error("❌ Signup error:", error); 

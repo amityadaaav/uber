@@ -15,7 +15,7 @@ exports.Login = async (req, res) => {
     }
 
     // 2️⃣ Find user in DB (use await) 
-    const existingUser = await User.findOne({ email });
+    const existingUser = await User.findOne({ email }).select("+password");
     if (!existingUser) {
       return res.status(404).json({
         success: false,

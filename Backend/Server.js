@@ -5,7 +5,8 @@ const cors=require("cors")
 const app=express()
 const PORT=process.env.PORT
 app.use(cors())
-
+const cookieParser = require('cookie-parser');
+app.use(cookieParser());
 //midddleware 
 app.use(express.json()); 
 const userRoutes=require("./Router/user") 

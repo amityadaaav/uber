@@ -21,9 +21,19 @@ const LoginSchema=new mongoose.Schema({
     password:{
         type:String,
         required:true,
+        select:false
        
 
     },
+    avatar:{
+            type:String,
+    },
+    mobileNo:{
+        type:Number,
+    },
+    address:{
+           type:String,
+    }
 },{timestamps:true})
 
 module.exports=mongoose.model("user",LoginSchema)

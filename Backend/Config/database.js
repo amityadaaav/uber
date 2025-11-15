@@ -1,11 +1,13 @@
     const mongoose=require("mongoose")
     require("dotenv").config()
+    dotenv.config();
+     DATABASE_URL="mongodb+srv://amityadaaav:Amit123456@cluster0.6pjd9ia.mongodb.net/uber?retryWrites=true&w=majority";
 
-    const DbConnect=()=>{
-        mongoose.connect(process.env.DATABASE_URL,{
+    const DbConnect=()=>{ 
+        mongoose.connect(process.env.DATABASE_URL,{   
         })
         .then(()=>{console.log("DB connected succesfully")
-            //  ✅ Test insert is code ka use tab hoga ki connected hai ki nahi
+        //  ✅ Test insert is code ka use tab hoga ki connected hai ki nahi
         // const userSchema = new mongoose.Schema({
         //     name: String,
         //     email: String

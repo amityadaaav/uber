@@ -7,7 +7,7 @@ const Home = () => {
         <img className="w-16 ml-8" src="https://www.logo.wine/a/logo/Uber/Uber-Logo.wine.svg" alt="" />
         <div className='bg-white py-4 px-4 '>
             <h2 className='text-3xl font-bold '>Get started with uber</h2>
-      <Link to="/login" className='w-full bg-black text-white py-3 rounded mt-2'>Continoue</Link>
+      <Link to="/login" className='flex item-center justify-center w-full bg-black text-white py-3 rounded mt-2'>Continoue</Link>
     </div>
     </div>
   )

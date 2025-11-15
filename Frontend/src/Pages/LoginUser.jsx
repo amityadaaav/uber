@@ -1,19 +1,48 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 const LoginUser = () => {
-  return (
-    <div className='p-7 h-screen flex justify-center items-center'>
-       <img className="w-16 ml-8" src="https://www.logo.wine/a/logo/Uber/Uber-Logo.wine.svg" alt="" />
+   const [email,setEmail]=React.useState("");
+   const [password,setPassword]=React.useState("");
+   const[userdata,setUserdata]=React.useState("");
+   const handleSubmit=(e)=>{
+    e.preventDefault();
+    console.log(email,password);
+    setUserdata({email,password});
+    setEmail("");
+    setPassword("");
 
-      <form action="">
-        <h2>Login User</h2>
-        <div>
-          <label htmlFor="email">Email:</label>
-          <input type="email" />
-          <label htmlFor="email">Password:</label>
-          <input type="password" /> 
-          </div>
+   }
+
+  return (
+    <div className="p-7 h-screen flex flex-col justify-center items-center">
+
+      {/* Uber Logo */}
+      <img className="w-16 mb-10" src="https://www.logo.wine/a/logo/Uber/Uber-Logo.wine.svg" alt=""/>
+
+      {/* Login Form */}
+      <form className="w-full max-w-sm bg-white p-7 shadow rounded-lg" onSubmit={handleSubmit}>
+        <h2 className="text-lg font-medium mb-4 text-center">Login User</h2>
+
+        <label htmlFor="email" className="text-lg font-medium mb-1">
+          Email:
+        </label>
+        <input className="bg-[#eeeeee] mb-5 rounded px-4 py-2 border w-full" type="email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+
+        <label htmlFor="password" className="text-lg font-medium mb-1">Password:</label>
+        <input className="bg-[#eeeeee] mb-5 rounded px-4 py-2 border w-full" type="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
+        <Link className="bg-[#111] text-white font-semibold mb-4 py-3 rounded flex items-center justify-center w-full" onClick={handleSubmit} > Login</Link>
+
+        <Link className="text-blue-600 text-center block" to="/userSignup" >   Register as User </Link>
       </form>
+      {/* Captain Login Button */}
+      <Link
+        className="bg-[#10b461] text-white font-semibold mt-5 py-3 rounded flex items-center justify-center w-full max-w-sm shadow"
+        to="/captainLogin"
+      >
+        Login as Captain
+      </Link>
+
     </div>
   )
 }

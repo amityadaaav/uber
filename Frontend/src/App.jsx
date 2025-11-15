@@ -7,6 +7,8 @@ import Home from './Pages/Home'
 import LoginUser from './Pages/LoginUser'
 import CaptainLogin from './Pages/CaptainLogin'
 import UserSignup from './Pages/UserSignup'
+import CaptainSignup from './Pages/CaptainSignup'
+
 
 function App() {
 
@@ -18,6 +20,7 @@ function App() {
         <Route  path='/loginUser' element={<LoginUser/>}/>
         <Route  path='/captainLogin' element={<CaptainLogin/>}/>
         <Route  path='/userSignup' element={<UserSignup/>}/>
+        <Route  path='/captainSignup' element={<CaptainSignup/>}/>
       </Routes>
       </BrowserRouter>
       

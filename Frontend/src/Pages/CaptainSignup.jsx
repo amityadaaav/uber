@@ -1,21 +1,22 @@
+
 import React from 'react'
 import { Link } from 'react-router-dom'
 
-const UserSignup = () => {
+const CaptainSignup = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [firstname, setFirstname] = React.useState("");
   const [lastname, setLastname] = React.useState("");
-  const [userdata, setUserdata] = React.useState("");
+  const [captaindata, setCaptaindata] = React.useState("");
 
   const handleRegister = (e) => {
     e.preventDefault();
-    setUserdata({ email, password, firstname, lastname });
+    setCaptaindata({ email, password, firstname, lastname });
     setEmail("");
     setPassword("");
     setFirstname("");
     setLastname("");
-    console.log(userdata);
+    console.log(captaindata);
   };
 
   return (
@@ -33,7 +34,7 @@ const UserSignup = () => {
         className="w-full max-w-sm bg-white p-7 shadow-lg rounded-xl border"
         onSubmit={handleRegister}
       >
-        <h2 className="text-xl font-semibold mb-6 text-center">Signup User</h2>
+        <h2 className="text-xl font-semibold mb-6 text-center">Signup Captain</h2>
 
         {/* First & Last Name in Same Row */}
         <div className="flex gap-4">
@@ -86,9 +87,9 @@ const UserSignup = () => {
         {/* Login Redirect */}
         <Link
           className="text-blue-600 text-center block underline"
-          to="/loginUser"
+          to="/captainLogin"
         >
-          Login as User
+          Login as Captain
         </Link>
       </form>
 
@@ -100,4 +101,5 @@ const UserSignup = () => {
   );
 };
 
-export default UserSignup;
+export default CaptainSignup;
+

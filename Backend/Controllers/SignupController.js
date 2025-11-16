@@ -12,7 +12,7 @@ exports.Signup = async (req, res) => {
     // --------------------------------------------
     if (!captchaToken) {
       return res.status(400).json({
-        success: false,
+        success: false, 
         message: "Captcha verification failed",
       });
     }

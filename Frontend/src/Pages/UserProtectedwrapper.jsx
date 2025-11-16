@@ -1,18 +1,21 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { useNavigate } from 'react-router-dom';
 
-const UserProtectedwrapper = ({children}) => {
-    const token=localStorage.getItem("token")
-    const navigate=useNavigate();
-    console.log("token in wrapper",token);
-    if(!token){
-        navigate("/loginUser")
-    }
-  return (
-    <div>
-      {children}
-    </div>
-  )
-}
+const UserProtectedwrapper = ({ children }) => {
+  const token = localStorage.getItem("token");
+  const navigate = useNavigate();
 
-export default UserProtectedwrapper
+  useEffect(() => {
+    if (!token) {
+      navigate("/loginUser");
+    }
+  }, [token, navigate]);
+
+  if (!token) {
+    return null; // or loader
+  }
+
+  return <>{children}</>;
+};
+
+export default UserProtectedwrapper;

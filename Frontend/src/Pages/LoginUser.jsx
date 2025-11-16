@@ -1,14 +1,25 @@
+import axios from 'axios';
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const LoginUser = () => {
    const [email,setEmail]=React.useState("");
    const [password,setPassword]=React.useState("");
    const[userdata,setUserdata]=React.useState("");
-   const handleSubmit=(e)=>{
+   const navigate=useNavigate();
+   const handleSubmit=async (e)=>{
     e.preventDefault();
-    console.log(email,password);
-    setUserdata({email,password});
+    const userData={
+      email:email,
+      password:password
+    }
+    const res=await axios.post(`${import.meta.env.VITE_BASE_URL}/Login`,userData);
+    if(res.status===200){
+      const data=res.data;
+      setUserdata(data.user);
+      localStorage.setItem("token",data.token); 
+      navigate("/home");
+    }
     setEmail("");
     setPassword("");
 
@@ -31,7 +42,7 @@ const LoginUser = () => {
 
         <label htmlFor="password" className="text-lg font-medium mb-1">Password:</label>
         <input className="bg-[#eeeeee] mb-5 rounded px-4 py-2 border w-full" type="password" value={password} onChange={(e)=>setPassword(e.target.value)}/>
-        <Link className="bg-[#111] text-white font-semibold mb-4 py-3 rounded flex items-center justify-center w-full" onClick={handleSubmit} > Login</Link>
+        <button className="bg-[#111] text-white font-semibold mb-4 py-3 rounded flex items-center justify-center w-full" type="submit" > Login</button>
 
         <Link className="text-blue-600 text-center block" to="/userSignup" >   Register as User </Link>
       </form>

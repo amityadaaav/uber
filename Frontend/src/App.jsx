@@ -28,6 +28,11 @@ function App() {
               </UserProtectedwrapper>
             }
           />
+          <Route path='/logout' element={
+            <UserProtectedwrapper>
+            <Userlogout />
+            </UserProtectedwrapper>
+          } />
         </Routes>
       </BrowserRouter>
     </>

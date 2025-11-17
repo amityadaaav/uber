@@ -5,7 +5,7 @@ const mongoose=require("mongoose")
 
     const DbConnect=()=>{ 
         mongoose.connect(process.env.DATABASE_URL,{   
-        })
+        }) 
         .then(()=>{console.log("DB connected succesfully")
         //  ✅ Test insert is code ka use tab hoga ki connected hai ki nahi
         // const userSchema = new mongoose.Schema({

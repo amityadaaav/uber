@@ -6,6 +6,8 @@ import UserSignup from './Pages/UserSignup'
 import CaptainSignup from './Pages/CaptainSignup'
 import Start from "./Pages/Start"
 import UserProtectedwrapper from './Pages/UserProtectedwrapper'
+import Userlogout from "./Pages/Userlogout"
+
 
 function App() {
   return (

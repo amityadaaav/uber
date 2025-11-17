@@ -1,13 +1,18 @@
 
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const CaptainSignup = () => {
+  
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [firstname, setFirstname] = React.useState("");
   const [lastname, setLastname] = React.useState("");
   const [captaindata, setCaptaindata] = React.useState("");
+  const [vcolor,setVcolor]=useState("")
+  const [capacity,setCapacity]=useState("")
+  const [vehicleType,setVehicleType]=useState("")
+  const [vplate,setVplate]=useState("")
 
   const handleRegister = (e) => {
     e.preventDefault();
@@ -77,6 +82,58 @@ const CaptainSignup = () => {
           onChange={(e) => setPassword(e.target.value)}
         />
 
+        {/* vehicle  info */}
+         <label className="block text-lg font-medium mb-1">Vehicle information:</label>
+        <div className="flex gap-4">
+          <div className="w-1/2">
+            <input
+              className="bg-[#eeeeee] mb-4 rounded px-4 py-2 border w-full focus:outline-none focus:ring-2 focus:ring-black"
+              type="text"
+              value={vcolor}
+              placeholder='Vehicle color'
+              onChange={(e) => setVcolor(e.target.value)}
+            />
+          </div>
+
+          <div className="w-1/2">
+            <select
+              className="bg-[#eeeeee] mb-4 rounded px-4 py-2 border w-full focus:outline-none focus:ring-2 focus:ring-black"
+              value={vehicleType}
+              onChange={(e) => setVehicleType(e.target.value)}
+            >
+              <option value="">Select Vehicle Type</option>
+              <option value="bike">Bike</option>
+              <option value="car">Car</option>
+              <option value="auto">Auto</option>
+              <option value="suv">SUV</option>
+            </select>
+
+          </div>
+        </div>
+
+        <div className="flex gap-4">
+          <div className="w-1/2">
+
+            <input
+              className="bg-[#eeeeee] mb-4 rounded px-4 py-2 border w-full focus:outline-none focus:ring-2 focus:ring-black"
+              type="number"
+              value={vplate}
+              placeholder='No Plate'
+              onChange={(e) => setVplate(e.target.value)}
+            />
+          </div>
+
+          <div className="w-1/2">
+            <input
+              className="bg-[#eeeeee] mb-4 rounded px-4 py-2 border w-full focus:outline-none focus:ring-2 focus:ring-black"
+              type="text"
+              value={capacity}
+              placeholder='Capacity'
+              onChange={(e) => setCapacity(e.target.value)}
+            />
+          </div>
+        </div>
+        
         {/* Register Button */}
           <Link
                   className="bg-[#111] text-white font-semibold mt-5 py-3 rounded flex items-center justify-center w-full max-w-sm shadow"

@@ -1,9 +1,9 @@
 
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
 
 const CaptainSignup = () => {
-  
+  const {setCaptain}=useContext()
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [firstname, setFirstname] = React.useState("");
@@ -37,7 +37,7 @@ const CaptainSignup = () => {
     setPassword("");
     setFirstname("");
     setLastname("");
-    Navigate("/")
+    Navigate("/captainlogin")
   
     } catch (error) {
       console.log("Signup Error:", error);

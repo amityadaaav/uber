@@ -1,9 +1,10 @@
 
 import React, { useContext, useState } from 'react'
 import { Link } from 'react-router-dom'
-
+import { CaptainContext } from "../Context/CaptainContext/CreateContextCaptain";
 const CaptainSignup = () => {
-  const {setCaptain}=useContext()
+  const { setCaptain } = useContext(CaptainContext);
+
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [firstname, setFirstname] = React.useState("");
@@ -18,12 +19,16 @@ const CaptainSignup = () => {
     e.preventDefault();
     try {
       const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/Signup`, {
-        Firstname: firstname,
-        lastname: lastname,
-        email: email,
-        password: password,
-        captchaToken: captchaValue  // <-- Send token to backend
+        firstname,
+        lastname,
+        email,
+        password,
+        vcolor,
+        vehicleType,
+        vplate,
+        capacity
       });
+
       if(res.status===200){
         alert("Captain Registered Successfully");
 

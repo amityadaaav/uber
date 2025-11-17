@@ -14,14 +14,35 @@ const CaptainSignup = () => {
   const [vehicleType,setVehicleType]=useState("")
   const [vplate,setVplate]=useState("")
 
-  const handleRegister = (e) => {
+  const handleRegister =async (e) => {
     e.preventDefault();
-    setCaptaindata({ email, password, firstname, lastname });
+    try {
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/Signup`, {
+        Firstname: firstname,
+        lastname: lastname,
+        email: email,
+        password: password,
+        captchaToken: captchaValue  // <-- Send token to backend
+      });
+      if(res.status===200){
+        alert("Captain Registered Successfully");
+
+      }
+      setCaptain(res.data.user);
+        localStorage.setItem("token", res.data.token);
+      
+    
+   
     setEmail("");
     setPassword("");
     setFirstname("");
     setLastname("");
-    console.log(captaindata);
+    Navigate("/")
+  
+    } catch (error) {
+      console.log("Signup Error:", error);
+      alert(error.response?.data?.message || "Signup Failed");
+    }
   };
 
   return (

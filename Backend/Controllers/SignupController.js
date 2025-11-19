@@ -9,7 +9,7 @@ exports.Signup = async (req, res) => {
 
     // --------------------------------------------
     // 1️⃣ CHECK CAPTCHA FIRST
-    // --------------------------------------------
+    // ------------------------------- -------------
     if (!captchaToken) {
       return res.status(400).json({
         success: false, 

@@ -1,12 +1,14 @@
 
 import React, { useContext, useState } from 'react'
-import { Link } from 'react-router-dom'
-import { CaptainContext } from "../Context/CaptainContext/CreateContextCaptain";
+import { Link, useNavigate } from 'react-router-dom'
+import  CaptainContext  from "../Context/CaptainContext/CreateContextCaptain";
+import axios from "axios"
 const CaptainSignup = () => {
+  const navigate=useNavigate()
   const { setCaptain } = useContext(CaptainContext);
 
   const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [password, setPassword] = React.useState(""); 
   const [firstname, setFirstname] = React.useState("");
   const [lastname, setLastname] = React.useState("");
   const [captaindata, setCaptaindata] = React.useState("");
@@ -18,7 +20,7 @@ const CaptainSignup = () => {
   const handleRegister =async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/Signup`, {
+      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}`, {
         firstname,
         lastname,
         email,
@@ -35,14 +37,11 @@ const CaptainSignup = () => {
       }
       setCaptain(res.data.user);
         localStorage.setItem("token", res.data.token);
-      
-    
-   
     setEmail("");
     setPassword("");
     setFirstname("");
     setLastname("");
-    Navigate("/captainlogin")
+    navigate("/captainlogin")
   
     } catch (error) {
       console.log("Signup Error:", error);

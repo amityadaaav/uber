@@ -1,11 +1,11 @@
-const user = require("../Models/user");
+const captain = require("../Models/CaptainSchema");
 const bcrypt = require("bcrypt");
 const axios = require("axios");
 const jwt = require("jsonwebtoken");
 
-exports.Signup = async (req, res) => {
+exports.SignupCaptain = async (req, res) => {
   try {
-    const { Firstname, lastname, email, password, captchaToken } = req.body;
+    const { Firstname, lastname, email, password, color,plate,vehicleType,capacity} = req.body;
 
     // 1️⃣ CHECK CAPTCHA FIRST
     // if (!captchaToken) {
@@ -38,7 +38,7 @@ exports.Signup = async (req, res) => {
     // --------------------------------------------
     // 2️⃣ VALIDATE USER FIELDS
     // --------------------------------------------
-    if (!Firstname || !lastname || !email || !password) {
+    if (!Firstname || !lastname || !email || !password || !color|| !plate ||!vehicleType ||!capacity) {
       return res.status(400).json({
         success: false,
         message: "All fields are required",
@@ -63,10 +63,14 @@ exports.Signup = async (req, res) => {
     const hashedPassword = await bcrypt.hash(password, 10);
 
     // 4️⃣ SAVE USER
-    const newUser = await user.create({
+    const newUser = await captain.create({
       Firstname,
       lastname,
       email,
+      color,
+      plate,
+      vehicleType,
+      capacity,
       password: hashedPassword,
     });
 
@@ -81,7 +85,7 @@ exports.Signup = async (req, res) => {
     // 6️⃣ SEND RESPONSE
     return res.status(200).json({
       success: true,
-      message: `${Firstname} registered successfully`,
+      message: `Captain ${Firstname} registered successfully`,
       user: {
         id: newUser._id,
         Firstname: newUser.Firstname,

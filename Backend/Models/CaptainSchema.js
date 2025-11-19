@@ -3,7 +3,7 @@ const mongoose=require("mongoose")
 const CaptainSchema=new mongoose.Schema({
 
     Fullname:{
-        firstname:{
+        Firstname:{
             type:String,
             requred:true,
             minlength:[3,'color must be at least 3 characters long']
@@ -44,3 +44,4 @@ const CaptainSchema=new mongoose.Schema({
           }
     }
 })
+module.exports=mongoose.model("captain",CaptainSchema)

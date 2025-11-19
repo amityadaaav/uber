@@ -9,7 +9,7 @@ const CaptainLogin = () => {
    const handleSubmit=(e)=>{
     e.preventDefault();
     console.log(email,password);
-    setCaptainData({email,password});
+    setCaptainData({email,password}); 
     setEmail("");
     setPassword("");
 

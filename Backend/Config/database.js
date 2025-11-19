@@ -1,7 +1,7 @@
 const dotenv = require("dotenv");
 dotenv.config();
-const mongoose=require("mongoose")
-     DATABASE_URL="mongodb+srv://amityadaaav:Amit123456@cluster0.6pjd9ia.mongodb.net/uber?retryWrites=true&w=majority";
+const mongoose=require("mongoose") 
+     DATABASE_URL="mongodb+srv://amityadaaav:Amit1234@cluster0.6pjd9ia.mongodb.net/uber?retryWrites=true&w=majority";
 
     const DbConnect=()=>{ 
         mongoose.connect(process.env.DATABASE_URL,{   

@@ -9,7 +9,7 @@ const router=express.Router()
 
 router.post("/Signup",Signup) 
 router.post("/Login",Login) 
-router.post("/captainSignup",SignupCaptain)
+router.post("/captainsignup",SignupCaptain)
 router.get("/Profile", requireAuth, (req, res) => {
   res.status(200).json({
     success: true,

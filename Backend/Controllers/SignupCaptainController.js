@@ -36,7 +36,7 @@ exports.SignupCaptain = async (req, res) => {
     // }
 
     // --------------------------------------------
-    // 2️⃣ VALIDATE USER FIELDS
+    // 2️⃣ VALIDATE captain FIELDS
     // --------------------------------------------
     if (!Firstname || !lastname || !email || !password || !color|| !plate ||!vehicleType ||!capacity) {
       return res.status(400).json({
@@ -52,8 +52,8 @@ exports.SignupCaptain = async (req, res) => {
       });
     }
 
-    const existingUser = await user.findOne({ email });
-    if (existingUser) {
+    const existingcaptain = await captain.findOne({ email });
+    if (existingcaptain) {
       return res.status(400).json({
         success: false,
         message: "Email already exists",
@@ -62,8 +62,8 @@ exports.SignupCaptain = async (req, res) => {
     // 3️⃣ HASH PASSWORD
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 4️⃣ SAVE USER
-    const newUser = await captain.create({
+    // 4️⃣ SAVE captain
+    const newcaptain = await captain.create({
       Firstname,
       lastname,
       email,
@@ -77,7 +77,7 @@ exports.SignupCaptain = async (req, res) => {
     // 
     // 5️⃣ CREATE JWT TOKEN (Modern Way) 
     // const token = jwt.sign(
-    //   { id: newUser._id, email: newUser.email },
+    //   { id: newcaptain._id, email: newcaptain.email },
     //   process.env.JWT_SECRET,
     //   { expiresIn: "7d" }
     // );
@@ -86,11 +86,11 @@ exports.SignupCaptain = async (req, res) => {
     return res.status(200).json({
       success: true,
       message: `Captain ${Firstname} registered successfully`,
-      user: {
-        id: newUser._id,
-        Firstname: newUser.Firstname,
-        lastname: newUser.lastname,
-        email: newUser.email,
+      captain: {
+        id: newcaptain._id,
+        Firstname: newcaptain.Firstname,
+        lastname: newcaptain.lastname,
+        email: newcaptain.email,
       },
       // token: token,
     });

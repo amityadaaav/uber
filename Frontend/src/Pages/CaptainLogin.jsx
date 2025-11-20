@@ -1,20 +1,30 @@
 
+import axios from 'axios';
 import React from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useNavigate } from 'react-router-dom'
 
 const CaptainLogin = () => {
    const [email,setEmail]=React.useState("");
    const [password,setPassword]=React.useState("");
    const[captainData,setCaptainData]=React.useState("");
-   const handleSubmit=(e)=>{
-    e.preventDefault();
-    console.log(email,password);
-    setCaptainData({email,password}); 
+   const navigate=useNavigate()
+   const handleSubmit=async(e)=>{
+   e.preventDefault();
+    const captainData={
+      email:email,
+      password:password
+    }
+    const res=await axios.post(`${import.meta.env.VITE_BASE_URL}/logincaptain`,captainData);
+    if(res.status===200){
+      const data=res.data;
+      setCaptainData(data.captain);
+      localStorage.setItem("token",data.token); 
+      navigate("/home");
+    }
     setEmail("");
     setPassword("");
 
    }
-
   return (
     <div className="p-7 h-screen flex flex-col justify-center items-center">
 
@@ -40,9 +50,9 @@ const CaptainLogin = () => {
    
       <Link
         className="bg-[#10b461] text-white font-semibold mt-5 py-3 rounded flex items-center justify-center w-full max-w-sm shadow"
-        to="/loginUser"
+        to="/logincaptain"
       >
-        Login as user
+        Login as captain
       </Link>
 
     </div>

@@ -9,8 +9,7 @@ const CaptainSchema=new mongoose.Schema({
             minlength:[3,'color must be at least 3 characters long']
         },
         lastname:{
-            type:String,
-           
+            type:String,   
         }
     },
     email:{

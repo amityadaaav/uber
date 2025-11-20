@@ -28,20 +28,20 @@ const CaptainSchema=new mongoose.Schema({
     vehicleDetails:{
           color:{
              type:String,
-             required:true
+            //  required:true
           },
           plate:{
              type:String,
-             required:true
+            //  required:true
           },
           vehicleType:{
              type:String,
-             required:true
+            //  required:true
           },
           capacity:{
              type:Number,
-             required:true
+            //  required:true
           }
     }
-})
+}) 
 module.exports=mongoose.model("captain",CaptainSchema)

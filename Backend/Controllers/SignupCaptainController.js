@@ -5,45 +5,19 @@ const jwt = require("jsonwebtoken");
 
 exports.SignupCaptain = async (req, res) => {
   try {
-    const { Firstname, lastname, email, password, color,plate,vehicleType,capacity} = req.body;
+    const { Fullname, email, password, vehicleDetails } = req.body;
 
-    // 1️⃣ CHECK CAPTCHA FIRST
-    // if (!captchaToken) {
-    //   return res.status(400).json({
-    //     success: false, 
-    //     message: "Captcha verification failed",
-    //   });
-    // }
+    console.log("REQ BODY:", req.body);
 
-    // const googleURL = "https://www.google.com/recaptcha/api/siteverify";
-
-    // const captchaVerify = await axios.post(
-    //   googleURL,
-    //   null,
-    //   {
-    //     params: {
-    //       secret: process.env.RECAPTCHA_SECRET,   // MUST add in .env
-    //       response: captchaToken,
-    //     },
-    //   }
-    // );
-
-    // if (!captchaVerify.data.success) {
+    // if (!Fullname || !Fullname.Firstname || !Fullname.lastname ||
+    //     !email || !password || !vehicleDetails ||
+    //     !vehicleDetails.color || !vehicleDetails.plate ||
+    //     !vehicleDetails.vehicleType || !vehicleDetails.capacity) {
     //   return res.status(400).json({
     //     success: false,
-    //     message: "Captcha validation failed",
+    //     message: "All fields are required",
     //   });
     // }
-
-    // --------------------------------------------
-    // 2️⃣ VALIDATE captain FIELDS
-    // --------------------------------------------
-    if (!Firstname || !lastname || !email || !password || !color|| !plate ||!vehicleType ||!capacity) {
-      return res.status(400).json({
-        success: false,
-        message: "All fields are required",
-      });
-    }
 
     if (password.length < 3) {
       return res.status(400).json({
@@ -59,40 +33,28 @@ exports.SignupCaptain = async (req, res) => {
         message: "Email already exists",
       });
     }
-    // 3️⃣ HASH PASSWORD
+
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // 4️⃣ SAVE captain
     const newcaptain = await captain.create({
-      Firstname,
-      lastname,
+      Fullname: {
+        Firstname: Fullname.Firstname,
+        lastname: Fullname.lastname,
+      },
       email,
-      color,
-      plate,
-      vehicleType,
-      capacity,
       password: hashedPassword,
+      vehicleDetails: {
+        color: vehicleDetails.color,
+        plate: vehicleDetails.plate,
+        vehicleType: vehicleDetails.vehicleType,
+        capacity: vehicleDetails.capacity,
+      }
     });
 
-    // 
-    // 5️⃣ CREATE JWT TOKEN (Modern Way) 
-    // const token = jwt.sign(
-    //   { id: newcaptain._id, email: newcaptain.email },
-    //   process.env.JWT_SECRET,
-    //   { expiresIn: "7d" }
-    // );
-
-    // 6️⃣ SEND RESPONSE
     return res.status(200).json({
       success: true,
-      message: `Captain ${Firstname} registered successfully`,
-      captain: {
-        id: newcaptain._id,
-        Firstname: newcaptain.Firstname,
-        lastname: newcaptain.lastname,
-        email: newcaptain.email,
-      },
-      // token: token,
+      message: `Captain ${Fullname.Firstname} registered successfully`,
+      captain: newcaptain
     });
 
   } catch (error) {

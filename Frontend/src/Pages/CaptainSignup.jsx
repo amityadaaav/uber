@@ -11,7 +11,7 @@ const CaptainSignup = () => {
   const [password, setPassword] = React.useState(""); 
   const [firstname, setFirstname] = React.useState("");
   const [lastname, setLastname] = React.useState("");
-  const [captaindata, setCaptaindata] = React.useState("");
+  const [captaindata, setCaptaindata] = React.useState(""); 
   const [vcolor,setVcolor]=useState("")
   const [capacity,setCapacity]=useState("")
   const [vehicleType,setVehicleType]=useState("")
@@ -20,16 +20,22 @@ const CaptainSignup = () => {
   const handleRegister =async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${import.meta.env.VITE_BASE_URL}`, {
-        firstname,
-        lastname,
-        email,
-        password,
-        vcolor,
-        vehicleType,
-        vplate,
-        capacity
-      });
+          const res = await axios.post(`${import.meta.env.VITE_BASE_URL}/captainsignup`, {
+    Fullname: {
+      Firstname: firstname,
+      lastname: lastname
+    },
+    email,
+    password,
+    vehicleDetails: {
+      color: vcolor,
+      plate: vplate,
+      vehicleType,
+      capacity: Number(capacity),
+    }
+  });
+
+
 
       if(res.status===200){
         alert("Captain Registered Successfully");
@@ -37,11 +43,11 @@ const CaptainSignup = () => {
       }
       setCaptain(res.data.user);
         localStorage.setItem("token", res.data.token);
-    setEmail("");
-    setPassword("");
-    setFirstname("");
-    setLastname("");
-    navigate("/captainlogin")
+        setEmail("");
+        setPassword("");
+        setFirstname("");
+        setLastname("");
+        navigate("/captainlogin")
   
     } catch (error) {
       console.log("Signup Error:", error);
